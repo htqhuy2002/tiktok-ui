@@ -9,6 +9,7 @@
     width: var(--default-layout-width);
     display: flex;
     margin-top: var(--default-layout-header-height);
+    max-width: 100%;
 }
 
 .content {
