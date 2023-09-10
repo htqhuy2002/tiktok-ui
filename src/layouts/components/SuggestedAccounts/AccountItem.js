@@ -4,18 +4,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
 
+import Image from '~/components/Image';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import styles from './SuggestedAccounts.module.scss';
 import AccountPreview from './AccountPreview/AccountPreview';
 
 const cx = classNames.bind(styles);
 
-function AccountItem() {
+function AccountItem({ data }) {
     const renderPreview = (props) => {
         return (
             <div tabIndex="-1" {...props}>
                 <PopperWrapper>
-                    <AccountPreview />
+                    <AccountPreview data={data} />
                 </PopperWrapper>
             </div>
         );
@@ -25,17 +26,13 @@ function AccountItem() {
         <div>
             <Tippy interactive delay={[800, 0]} offset={[-35, 0]} placement="bottom-end" render={renderPreview}>
                 <div className={cx('account-item')}>
-                    <img
-                        className={cx('avatar')}
-                        src="https://cdnimg.vietnamplus.vn/uploaded/mzdic/2023_03_24/cristiano_ronaldo_portugal_2403.jpg"
-                        alt=""
-                    />
+                    <Image className={cx('avatar')} src={data.avatar} alt={data.nickname} />
                     <div className={cx('item-info')}>
                         <p className={cx('nickname')}>
-                            <strong>CR7Siuuu</strong>
-                            <FontAwesomeIcon className={cx('check')} icon={faCheckCircle} />
+                            <strong>{data.nickname}</strong>
+                            {data.tick && <FontAwesomeIcon className={cx('check')} icon={faCheckCircle} />}
                         </p>
-                        <p className={cx('name')}>Cristiano Ronaldo</p>
+                        <p className={cx('name')}>{`${data.first_name} ${data.last_name}`}</p>
                     </div>
                 </div>
             </Tippy>
@@ -43,6 +40,8 @@ function AccountItem() {
     );
 }
 
-AccountItem.propTypes = {};
+AccountItem.propTypes = {
+    data: PropTypes.object.isRequired,
+};
 
 export default AccountItem;
