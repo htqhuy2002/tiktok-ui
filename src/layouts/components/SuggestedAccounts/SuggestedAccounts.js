@@ -11,12 +11,10 @@ function SuggestedAccounts({ label, data = [] }) {
             <p className={cx('label')}>{label}</p>
 
             {data.map((account) => (
-                <AccountItem key={account.id} data={account}/>
+                <AccountItem key={account.id} data={account} />
             ))}
 
-            <p className={cx('more-btn')}>
-                See all
-            </p>
+            <p className={cx('more-btn')}>See all</p>
         </div>
     );
 }
