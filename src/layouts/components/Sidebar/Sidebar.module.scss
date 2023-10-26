@@ -2,6 +2,23 @@
     width: 356px;
     padding: 20px 0 26px 8px;
     margin-left: -18px;
+    position: fixed;
+    overflow-y: overlay;
+    max-height: 100%;
+
+    &:not(:hover)::-webkit-scrollbar-thumb {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background: rgba(0, 0, 0, 0.05);
+    }
+
 }
 
 .copyright {
