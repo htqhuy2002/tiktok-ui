@@ -5,6 +5,7 @@
     position: fixed;
     overflow-y: overlay;
     max-height: 100%;
+    top: 0;
 
     &:not(:hover)::-webkit-scrollbar-thumb {
         background: transparent;
