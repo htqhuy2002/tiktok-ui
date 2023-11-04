@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect} from 'react';
+import { useRef, useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
@@ -19,6 +19,7 @@ import {
 import Button from '~/components/Button';
 import Image from '~/components/Image';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
+import ShareAction from '~/components/ShareAction';
 
 const cx = classNames.bind(styles);
 
@@ -101,9 +102,7 @@ function Video({ data, mute, volume, adjustVolume, toggleMuted }) {
                                                         alt={data?.user.avatar}
                                                     />
 
-                                                    <Button primary outline>
-                                                        Follow
-                                                    </Button>
+                                                    <Button outline>Follow</Button>
                                                 </div>
 
                                                 <div className={cx('tippy-username')}>
@@ -209,12 +208,14 @@ function Video({ data, mute, volume, adjustVolume, toggleMuted }) {
                             </Button>
                             <p className={cx('numbers')}>{data?.comments_count}</p>
                         </div>
-                        <div className={cx('action-btn')}>
-                            <Button rounded>
-                                <ShareSolidIcon />
-                            </Button>
-                            <p className={cx('numbers')}>{data?.shares_count}</p>
-                        </div>
+                        <ShareAction offset={[90, 0]}>
+                            <div className={cx('action-btn')}>
+                                <Button rounded>
+                                    <ShareSolidIcon />
+                                </Button>
+                                <p className={cx('numbers')}>{data?.shares_count}</p>
+                            </div>
+                        </ShareAction>
                     </div>
                 </div>
             </div>

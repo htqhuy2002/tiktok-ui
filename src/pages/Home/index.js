@@ -17,7 +17,6 @@ function Home() {
     useEffect(() => {
         const fetchAPI = async () => {
             const result = await videoService.getVideo('for-you', page);
-            console.log(result);
             setVideos((prev) => [...prev, ...result]);
         };
 
