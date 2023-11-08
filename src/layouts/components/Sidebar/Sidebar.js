@@ -18,20 +18,24 @@ import * as userService from '~/services/userService';
 
 const cx = classNames.bind(styles);
 
-const PER_PAGE = 5;
-
 function Sidebar() {
     const [suggestedUser, setSuggestedUser] = useState([]);
     const currentYear = new Date().getFullYear();
+    const [seeAll, setSeeAll] = useState(false);
 
     useEffect(() => {
-        userService
-            .getSuggested({ page: 1, perPage: PER_PAGE })
-            .then((data) => {
-                setSuggestedUser((prevUsers) => [...prevUsers, ...data]);
-            })
-            .catch((error) => console.log(error));
-    }, []);
+        const fetchAPI = async () => {
+            if (!seeAll) {
+                const result = await userService.getSuggested(1, 5);
+                setSuggestedUser(result);
+            } else {
+                const result = await userService.getSuggested(1, 16);
+                setSuggestedUser(result);
+            }
+        };
+
+        fetchAPI();
+    }, [seeAll]);
 
     return (
         <aside>
@@ -57,8 +61,8 @@ function Sidebar() {
                     />
                 </Menu>
 
-                <SuggestedAccounts label="Suggested accounts" data={suggestedUser} />
-                <SuggestedAccounts label="Following accounts" data={suggestedUser} />
+                <SuggestedAccounts seeAll={seeAll} setSeeAll={setSeeAll} label="Suggested accounts" data={suggestedUser} />
+                <SuggestedAccounts seeAll={seeAll} setSeeAll={setSeeAll} label="Following accounts" data={suggestedUser} />
                 <div className={cx('footer')}>
                     <div className={cx('links-1')}>
                         <a href="https://www.tiktok.com/about?lang=en" target="blank">
