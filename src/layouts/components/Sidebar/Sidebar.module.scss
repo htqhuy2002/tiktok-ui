@@ -23,6 +23,38 @@
 
 }
 
+.login {
+    font-weight: 500;
+    padding: 16px 0;
+    position: relative;
+    
+    .detail {
+        padding: 0 8px;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 8px;
+        right: 8px;
+        top: 0;
+        height: 1px;
+        background: rgba(22, 24, 35, 0.08);
+    }
+
+    p {
+        color: rgba(22, 24, 35, 0.5);
+        font-weight: 400;
+        margin-bottom: 20px;
+    }
+
+    button {
+        width: 100%;
+        height: 48px;
+        font-weight: 700;
+    }
+}
+
 .copyright {
     display: flex;
     align-items: center;

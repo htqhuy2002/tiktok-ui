@@ -15,10 +15,12 @@ import {
 import Menu, { MenuItem } from './Menu';
 import SuggestedAccounts from '../SuggestedAccounts/SuggestedAccounts';
 import * as userService from '~/services/userService';
+import Button from '~/components/Button';
 
 const cx = classNames.bind(styles);
 
 function Sidebar() {
+    const currentUser = false;
     const [suggestedUser, setSuggestedUser] = useState([]);
     const currentYear = new Date().getFullYear();
     const [seeAll, setSeeAll] = useState(false);
@@ -60,9 +62,29 @@ function Sidebar() {
                         activeIcon={<LiveActiveIcon />}
                     />
                 </Menu>
+                {!currentUser && (
+                    <div className={cx('login')}>
+                        <div className={cx('detail')}>
+                            <p>Log in to follow creators, like videos, and view comments.</p>
+                            <Button outline>Log in</Button>
+                        </div>
+                    </div>
+                )}
 
-                <SuggestedAccounts seeAll={seeAll} setSeeAll={setSeeAll} label="Suggested accounts" data={suggestedUser} />
-                <SuggestedAccounts seeAll={seeAll} setSeeAll={setSeeAll} label="Following accounts" data={suggestedUser} />
+                <SuggestedAccounts
+                    seeAll={seeAll}
+                    setSeeAll={setSeeAll}
+                    label="Suggested accounts"
+                    data={suggestedUser}
+                />
+                {currentUser && (
+                    <SuggestedAccounts
+                        seeAll={seeAll}
+                        setSeeAll={setSeeAll}
+                        label="Following accounts"
+                        data={suggestedUser}
+                    />
+                )}
                 <div className={cx('footer')}>
                     <div className={cx('links-1')}>
                         <a href="https://www.tiktok.com/about?lang=en" target="blank">
